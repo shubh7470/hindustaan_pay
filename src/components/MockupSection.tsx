@@ -1,22 +1,22 @@
-import { 
-  Bell, 
-  Send, 
-  CreditCard, 
-  ArrowRightLeft, 
-  MoreHorizontal, 
-  Wallet, 
-  Fingerprint, 
-  User, 
-  History, 
-  Check, 
-  Lock 
+import {
+  Bell,
+  Send,
+  CreditCard,
+  ArrowRightLeft,
+  MoreHorizontal,
+  Wallet,
+  Fingerprint,
+  User,
+  History,
+  Check,
+  Lock
 } from "lucide-react";
 
 export default function MockupSection() {
   return (
-    <div className="relative mx-auto max-w-md">
+    <div className="h-screen relative mx-auto max-w-md">
       {/* Floating Badges */}
-      
+
       {/* Left Badge - Received */}
       <div className="absolute top-40 -left-16 z-20 flex items-center gap-3 rounded-2xl bg-white p-4 shadow-[0_8px_30px_rgb(0,0,0,0.08)]">
         <div className="flex h-10 w-10 items-center justify-center rounded-full bg-emerald-100">
@@ -43,7 +43,7 @@ export default function MockupSection() {
 
       {/* Phone Frame */}
       <div className="relative z-10 mx-auto h-[700px] w-[340px] rounded-[3rem] border-[12px] border-[#0f172a] bg-white shadow-2xl overflow-hidden">
-        
+
         {/* Dynamic Island */}
         <div className="absolute left-1/2 top-2 z-30 h-6 w-24 -translate-x-1/2 rounded-full bg-[#0f172a]">
           {/* Camera dot */}
@@ -54,14 +54,14 @@ export default function MockupSection() {
 
         {/* App Content */}
         <div className="flex h-full flex-col px-6 pt-14 pb-6 overflow-y-auto hide-scrollbar">
-          
+
           {/* Header */}
           <div className="flex items-center justify-between mb-8">
             <div className="flex items-center gap-3">
               <div className="h-10 w-10 overflow-hidden rounded-full bg-slate-200">
-                <img 
-                  src="https://api.dicebear.com/7.x/avataaars/svg?seed=David" 
-                  alt="Avatar" 
+                <img
+                  src="https://api.dicebear.com/7.x/avataaars/svg?seed=David"
+                  alt="Avatar"
                   className="h-full w-full object-cover"
                 />
               </div>
@@ -80,7 +80,7 @@ export default function MockupSection() {
           <div className="relative mb-8 h-48 w-full overflow-hidden rounded-2xl bg-gradient-to-br from-indigo-900 via-purple-900 to-indigo-800 p-6 text-white shadow-lg">
             <div className="absolute -right-10 -top-10 h-32 w-32 rounded-full bg-white/5 blur-2xl"></div>
             <div className="absolute -bottom-10 -left-10 h-32 w-32 rounded-full bg-pink-500/10 blur-2xl"></div>
-            
+
             <div className="flex items-center justify-between">
               {/* Chip icon simulation */}
               <div className="h-8 w-10 rounded bg-white/20 backdrop-blur-sm border border-white/10 flex items-center justify-center relative overflow-hidden">
@@ -89,14 +89,14 @@ export default function MockupSection() {
               </div>
               <p className="font-bold italic tracking-wider">PayFlow</p>
             </div>
-            
+
             <div className="mt-8 flex items-center justify-between text-lg tracking-[0.2em] font-medium opacity-90">
               <span>••••</span>
               <span>••••</span>
               <span>••••</span>
               <span>8834</span>
             </div>
-            
+
             <div className="mt-6 flex items-center justify-between text-xs font-medium opacity-80 uppercase tracking-widest">
               <p>David G.</p>
               <p>09/29</p>
@@ -137,7 +137,7 @@ export default function MockupSection() {
               <h3 className="text-base font-bold text-slate-900">Recent Activity</h3>
               <button className="text-xs font-semibold text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full">See All</button>
             </div>
-            
+
             <div className="space-y-4">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
@@ -151,7 +151,7 @@ export default function MockupSection() {
                 </div>
                 <p className="text-sm font-bold text-slate-900">-$15.00</p>
               </div>
-              
+
               <div className="flex items-center justify-between opacity-50">
                 <div className="flex items-center gap-3">
                   <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-emerald-100 text-emerald-600">
@@ -166,7 +166,7 @@ export default function MockupSection() {
               </div>
             </div>
           </div>
-          
+
         </div>
 
         {/* Bottom Navigation */}
