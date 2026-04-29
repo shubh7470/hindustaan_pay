@@ -22,6 +22,7 @@ export const metadata: Metadata = {
 
 import Header from "@/components/header";
 import Footer from "@/components/footer";
+import ScrollAnimationOverlay from "@/components/ScrollAnimationOverlay";
 
 export default function RootLayout({
   children,
@@ -35,6 +36,7 @@ export default function RootLayout({
       className={cn("h-full", "antialiased", geistSans.variable, geistMono.variable, "font-sans", inter.variable)}
     >
       <body className="min-h-full flex flex-col pt-20">
+        <ScrollAnimationOverlay />
         <Header />
         <div className="flex-1 flex flex-col">{children}</div>
         <Footer />

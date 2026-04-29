@@ -5,6 +5,7 @@ export interface AndroidProps extends SVGProps<SVGSVGElement> {
   height?: number
   src?: string
   videoSrc?: string
+  children?: React.ReactNode
 }
 
 export function Android({
@@ -12,6 +13,7 @@ export function Android({
   height = 882,
   src,
   videoSrc,
+  children,
   ...props
 }: AndroidProps) {
   return (
@@ -83,6 +85,18 @@ export function Android({
             muted
             playsInline
           />
+        </foreignObject>
+      )}
+      {children && (
+        <foreignObject
+          width="360"
+          height="800"
+          transform="translate(9 14)"
+          clipPath="url(#clip0_514_20855)"
+        >
+          <div className="w-full h-full bg-white relative overflow-hidden">
+            {children}
+          </div>
         </foreignObject>
       )}
       <defs>

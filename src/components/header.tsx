@@ -7,7 +7,7 @@ export default function Header() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
         {/* Logo and Brand Name */}
         <div className="flex items-center gap-3">
-          <div className="relative w-10 h-10 overflow-hidden">
+          <div id="header-logo" className="relative w-10 h-10 overflow-hidden">
             <Image 
               src="/Hpay_logo.png" 
               alt="Hindustaan Pay Logo" 
