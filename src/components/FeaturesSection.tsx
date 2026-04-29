@@ -35,7 +35,7 @@ const features = [
 
 export default function FeaturesSection() {
   return (
-    <section className="py-24 w-full relative">
+    <section className="">
       {/* Decorative background elements */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-[400px] bg-gradient-to-b from-indigo-50/50 to-transparent blur-3xl -z-10 rounded-full" />
       

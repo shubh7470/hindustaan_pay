@@ -3,6 +3,7 @@
 import { Sparkles, ArrowRight } from "lucide-react";
 import { Android } from "./ui/android";
 import { GooeyInput } from "./ui/gooey-input";
+import Page1 from "./mockupUI/Page1";
 
 export default function HeroSection() {
   return (
@@ -28,22 +29,22 @@ export default function HeroSection() {
       </p>
 
       {/* Waitlist Form */}
-      <GooeyInput placeholder="join waitlist" collapsedWidth={150} />
+      <GooeyInput placeholder="join waitlist" collapsedWidth={170} />
 
       {/* Mobile Mockups - Bottom aligned, 3D perspective */}
       <div className="flex w-full justify-center items-end"
         style={{ perspective: "1200px" }}>
         {/* Left Mobile */}
-        <div 
+        <div
           className="relative z-10 transition-all hover:scale-105 duration-500 origin-center"
           style={{ transform: "rotateY(20deg)" }}
         >
-          <Android 
-            className="w-[260px] h-auto sm:w-[320px] drop-shadow-2xl" 
+          <Android
+            className="w-65 h-auto sm:w-[320px] drop-shadow-2xl"
           >
             {/* Custom Screen Content */}
             <div id="left-mobile" className="w-full h-full flex flex-col items-center justify-center bg-slate-50 relative">
-              <div className="absolute inset-0 bg-gradient-to-br from-indigo-50 to-pink-50 opacity-50" />
+              <div className="absolute inset-0 bg-linear-to-br from-indigo-50 to-pink-50 opacity-50" />
               {/* This inner div is where the coin lands */}
               <div id="left-mobile-target" className="w-35 h-35 rounded-full border-2 border-indigo-100 flex items-center justify-center mb-4 z-10">
                 <div id="mobile-logo-reveal" className="w-25 h-25 relative opacity-0 transition-opacity duration-1000">
@@ -60,8 +61,9 @@ export default function HeroSection() {
         <div className="relative z-20 transition-all hover:scale-105 duration-500 origin-center -rotate-y-20">
           <Android
             className="w-57.5 h-auto sm:w-75 drop-shadow-2xl opacity-90"
-            src="https://images.unsplash.com/photo-1557683316-973673baf926?q=80&w=1000&auto=format&fit=crop"
-          />
+          >
+            <Page1 />
+          </Android>
         </div>
       </div>
     </div>
