@@ -61,12 +61,12 @@ export default function HeroSection() {
             <div id="left-mobile" className="w-full h-full flex flex-col items-center justify-center bg-slate-50 relative">
               <div className="absolute inset-0 bg-gradient-to-br from-indigo-50 to-pink-50 opacity-50" />
               {/* This inner div is where the coin lands */}
-              <div id="left-mobile-target" className="w-16 h-16 rounded-full border-2 border-indigo-100 flex items-center justify-center mb-4 z-10">
-                <div id="mobile-logo-reveal" className="w-10 h-10 relative opacity-0 transition-opacity duration-1000">
+              <div id="left-mobile-target" className="w-35 h-35 rounded-full border-2 border-indigo-100 flex items-center justify-center mb-4 z-10">
+                <div id="mobile-logo-reveal" className="w-25 h-25 relative opacity-0 transition-opacity duration-1000">
                   <img src="/Hpay_logo.png" alt="Logo" className="w-full h-full object-contain" />
                 </div>
               </div>
-              <p className="text-sm font-semibold text-slate-800 z-10">Hindustaan Pay</p>
+              <p className="text-lg font-semibold text-slate-800 z-10">Hindustaan Pay</p>
               <p className="text-[10px] text-slate-500 z-10">Initializing...</p>
             </div>
           </Android>
