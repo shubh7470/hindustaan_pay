@@ -12,6 +12,7 @@ export default function Header() {
               src="/Hpay_logo.png"
               alt="Hindustaan Pay Logo"
               fill
+              sizes="40px"
               className="size-24 object-contain"
               priority
             />
