@@ -1,3 +1,13 @@
+import HeroSection from "@/components/HeroSection";
+import MockupSection from "@/components/MockupSection";
+import FeaturesSection from "@/components/FeaturesSection";
+
 export default function HomePage() {
-  return <div></div>;
+  return (
+    <main>
+      <HeroSection />
+      <MockupSection />
+      <FeaturesSection />
+    </main>
+  );
 }
