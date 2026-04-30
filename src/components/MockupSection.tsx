@@ -143,9 +143,9 @@ export default function MockupSection() {
               <div>
                 <p className="text-xs font-medium text-indigo-100 mb-1">Your available balance</p>
                 <div className="flex items-center gap-3">
-                  <h2 className="text-[32px] font-bold text-white tracking-tight">$15,901.00</h2>
+                  <h2 className="text-[32px] font-bold text-white tracking-tight">₹15,901.00</h2>
                 </div>
-                <p className="text-sm font-medium text-indigo-100 mt-1">$12,450.34</p>
+                <p className="text-sm font-medium text-indigo-100 mt-1">₹12,450.34</p>
               </div>
               <div className="bg-white px-2.5 py-1 rounded-full flex items-center shadow-sm">
                 <span className="text-[10px] font-black text-green-500 tracking-wider">▲ 10%</span>
