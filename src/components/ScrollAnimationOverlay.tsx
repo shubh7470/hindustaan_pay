@@ -1,11 +1,14 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { useEffect, useState, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { IndianRupee } from "lucide-react";
 
+gsap.registerPlugin(ScrollTrigger);
+
 export default function ScrollAnimationOverlay() {
-  const { scrollY } = useScroll();
+  const coinRef = useRef<HTMLDivElement>(null);
   const [coords, setCoords] = useState({ 
     x0: 0, y0: 0, 
     x1: 0, y1: 0, 
@@ -65,78 +68,82 @@ export default function ScrollAnimationOverlay() {
     };
   }, []);
 
-  const { x0, y0, x1, y1, x2, y2, phase1Scroll, phase2Scroll } = coords;
-
-  // Keyframes for scroll positions
-  const scrollKeyframes = [
-    0, 
-    phase1Scroll / 2, 
-    phase1Scroll, 
-    phase1Scroll + (phase2Scroll - phase1Scroll) / 2, 
-    phase2Scroll
-  ];
-
-  // Curved X path: C-shape (bow left) then inverted C-shape (bow right)
-  const x = useTransform(
-    scrollY, 
-    scrollKeyframes, 
-    [x0, x0 - 150, x1, x1 + 150, x2]
-  );
-  
-  // Linear Y path (standard progression)
-  const y = useTransform(
-    scrollY, 
-    scrollKeyframes, 
-    [y0, (y0 + y1) / 2, y1, (y1 + y2) / 2, y2]
-  );
-  
-  // Scale effects
-  const scale = useTransform(
-    scrollY, 
-    scrollKeyframes, 
-    [0.5, 1.5, 0.8, 1.5, 0.8]
-  );
-  
-  // Opacity: Fade in at start, fade out at Phase 1 end, fade back in for Phase 2, fade out at final end
-  const opacity = useTransform(
-    scrollY, 
-    [0, 20, phase1Scroll - 20, phase1Scroll, phase1Scroll + 20, phase2Scroll - 20, phase2Scroll], 
-    [0, 1, 1, 0, 1, 1, 0]
-  );
-  
-  const rotate = useTransform(
-    scrollY, 
-    [0, phase2Scroll], 
-    [0, 1440]
-  );
-
-  // Logo Reveal Logic: Reveal when reaching Phase 1, stay visible afterwards
   useEffect(() => {
-    const unsubscribe = scrollY.on("change", (latest) => {
-      const logoElement = document.getElementById("mobile-logo-reveal");
-      if (logoElement) {
-        if (latest >= phase1Scroll - 20) {
-          logoElement.style.opacity = "1";
-        } else {
-          logoElement.style.opacity = "0";
+    if (!coords.valid || !coinRef.current) return;
+
+    const { x0, y0, x1, y1, x2, y2, phase1Scroll, phase2Scroll } = coords;
+
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: document.documentElement,
+        start: "top top",
+        end: `+=${phase2Scroll}`,
+        scrub: true,
+        onUpdate: (self) => {
+          const currentScroll = self.progress * phase2Scroll;
+          const logoElement = document.getElementById("mobile-logo-reveal");
+          if (logoElement) {
+            if (currentScroll >= phase1Scroll - 20) {
+              logoElement.style.opacity = "1";
+            } else {
+              logoElement.style.opacity = "0";
+            }
+          }
         }
       }
     });
-    return () => unsubscribe();
-  }, [scrollY, phase1Scroll]);
+
+    gsap.set(coinRef.current, { x: x0, y: y0, scale: 0.5, opacity: 0, rotation: 0 });
+
+    // Fade in
+    tl.to(coinRef.current, { opacity: 1, duration: 20, ease: "none" }, 0);
+
+    // Phase 1 Y
+    tl.to(coinRef.current, { y: y1, duration: phase1Scroll, ease: "none" }, 0);
+    
+    // Phase 1 X & Scale (C-shape bow left)
+    tl.to(coinRef.current, { x: x0 - 150, scale: 1.5, duration: phase1Scroll / 2, ease: "sine.out" }, 0);
+    tl.to(coinRef.current, { x: x1, scale: 0.8, duration: phase1Scroll / 2, ease: "sine.in" }, phase1Scroll / 2);
+
+    // Fade out Phase 1, Fade in Phase 2
+    tl.to(coinRef.current, { opacity: 0, duration: 20, ease: "none" }, phase1Scroll - 20);
+    tl.to(coinRef.current, { opacity: 1, duration: 20, ease: "none" }, phase1Scroll);
+
+    const p2Half = (phase2Scroll - phase1Scroll) / 2;
+
+    // Phase 2 Y
+    tl.to(coinRef.current, { y: y2, duration: phase2Scroll - phase1Scroll, ease: "none" }, phase1Scroll);
+
+    // Phase 2 X & Scale (Inverted C-shape bow right)
+    tl.to(coinRef.current, { x: x1 + 150, scale: 1.5, duration: p2Half, ease: "sine.out" }, phase1Scroll);
+    tl.to(coinRef.current, { x: x2, scale: 0.8, duration: p2Half, ease: "sine.in" }, phase1Scroll + p2Half);
+
+    // Fade out Final
+    tl.to(coinRef.current, { opacity: 0, duration: 20, ease: "none" }, phase2Scroll - 20);
+
+    // Rotation
+    tl.to(coinRef.current, { rotation: 1440, duration: phase2Scroll, ease: "none" }, 0);
+
+    return () => {
+      tl.kill();
+      ScrollTrigger.getAll().forEach(t => {
+         if (t.trigger === document.documentElement) t.kill();
+      });
+    };
+  }, [coords]);
 
   if (!coords.valid) return null;
 
   return (
     <div className="absolute top-0 left-0 w-full pointer-events-none z-[100]" style={{ height: "1px" }}>
-      <motion.div
-        style={{ x, y, scale, opacity, rotate }}
+      <div
+        ref={coinRef}
         className="absolute top-0 left-0"
       >
         <div className="relative -left-1/2 -top-1/2 flex items-center justify-center w-12 h-12 bg-gradient-to-br from-yellow-300 via-amber-400 to-orange-500 rounded-full shadow-[0_4px_20px_rgba(251,191,36,0.6)] border-2 border-yellow-200">
           <IndianRupee className="w-6 h-6 text-yellow-900" strokeWidth={3} />
         </div>
-      </motion.div>
+      </div>
     </div>
   );
 }
